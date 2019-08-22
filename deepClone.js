@@ -10,11 +10,8 @@ const deepClone = obj => {
   if (Array.isArray(obj) && obj.length) {
     clone.length = obj.length;
     return Array.from(clone);
-  } else if (Array.isArray(obj)) {
-    return Array.from(obj);
-  } else {
-    return clone;
-  }
+  } else if (Array.isArray(obj)) return [];
+  return clone;
 };
 
 const temp = [
@@ -22,7 +19,7 @@ const temp = [
     a: {
       b: {
         c: [1, 2],
-        fn: () => {}
+        fn: name => console.log("I am executed by", name)
       }
     },
     d: {
@@ -35,6 +32,7 @@ const temp = [
 
 const temp2 = deepClone(temp);
 temp2[0].a.b.fn = null;
+temp[0].a.b.fn("temp");
 
 console.log(JSON.stringify(temp2, null, 2));
 console.log(JSON.stringify(temp, null, 2));
