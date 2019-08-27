@@ -1,9 +1,9 @@
 const deepClone = inputObj => {
   let copy = Array.isArray(inputObj) ? [] : {};
-  for (const currentKey in inputObj) {
-    const currentValue = inputObj[currentKey];
-    copy[currentKey] = typeof currentValue === "object" ? deepClone(currentValue) : currentValue;
-  }
+  Object.keys(inputObj).forEach(key => {
+    const currentValue = inputObj[key];
+    copy[key] = typeof currentValue === "object" ? deepClone(currentValue) : currentValue;
+  });
   return copy;
 };
 
