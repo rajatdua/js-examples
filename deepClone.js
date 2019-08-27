@@ -1,17 +1,10 @@
-const deepClone = obj => {
-  let clone = Object.assign({}, obj);
-  Object.keys(clone).forEach(key => {
-    if (typeof obj[key] === "object") {
-      clone[key] = deepClone(obj[key]);
-    } else {
-      clone[key] = obj[key];
-    }
-  });
-  if (Array.isArray(obj) && obj.length) {
-    clone.length = obj.length;
-    return Array.from(clone);
-  } else if (Array.isArray(obj)) return [];
-  return clone;
+const deepClone = inputObj => {
+  let copy = Array.isArray(inputObj) ? [] : {};
+  for (const currentKey in inputObj) {
+    const currentValue = inputObj[currentKey];
+    copy[currentKey] = typeof currentValue === "object" ? deepClone(currentValue) : currentValue;
+  }
+  return copy;
 };
 
 const temp = [
